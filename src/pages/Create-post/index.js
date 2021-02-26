@@ -3,19 +3,29 @@ import { useState } from 'react';
 import FormPost from '../../components/Form-post';
 import Modal from '../../components/Modal';
 
+import { createNewPost } from '../../services/post.service';
+
 export default function CreatePost() {
-  const [formValues, setFormValues] = useState({ title: '', content: '' });
+  const [formValues, setFormValues] = useState({ title: '', content: '', isSending: false });
   const [formErrors, setFormErrors] = useState({ title: '', content: '' });
-  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState({ show: false, message: '', title: '' });
 
   const handleChange = ({ target: { name, value } }) => {
     setFormValues((lastValues) => ({ ...lastValues, [name]: value }));
     setFormErrors((lastValues) => ({ ...lastValues, [name]: '' }));
   };
 
-  const sendPost = (data) => {
-    setShowModal(true);
-    console.log(data);
+  const sendPost = async (data) => {
+    try {
+      setFormValues((last) => ({ ...last, isSending: true }));
+
+      await createNewPost(data);
+
+      setModalData({ show: true, title: 'Post created', message: 'Post was created successfully' });
+      setFormValues({ title: '', content: '', isSending: false });
+    } catch {
+      setModalData({ show: true, title: 'Error', message: 'Something is wrong, try later' });
+    }
   };
 
   const onSubmit = (e) => {
@@ -35,7 +45,7 @@ export default function CreatePost() {
     }
   };
 
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => setModalData({ show: false, message: '', title: '' });
 
   return (
     <>
@@ -45,11 +55,12 @@ export default function CreatePost() {
         errors={formErrors}
         onChange={handleChange}
         onSubmit={onSubmit}
+        isLoading={formValues.isSending}
       />
       <Modal
-        title="Post"
-        message="Post created successfully"
-        show={showModal}
+        title={modalData.title}
+        message={modalData.message}
+        show={modalData.show}
         onClose={handleCloseModal}
       />
     </>

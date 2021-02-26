@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import FormPost from '../../components/Form-post';
+import Modal from '../../components/Modal';
 
 export default function CreatePost() {
   const [formValues, setFormValues] = useState({ title: '', content: '' });
@@ -37,6 +38,7 @@ export default function CreatePost() {
         onChange={handleChange}
         onSubmit={onSubmit}
       />
+      <Modal show onClose={() => false} title="Post" message="Post created successfully" />
     </>
   );
 }

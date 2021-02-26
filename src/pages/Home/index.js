@@ -8,7 +8,7 @@ import { getAllPost, deletePost } from '../../services/post.service';
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(false);
-  const [modalData, setModalData] = useState({ show: false, message: '' });
+  const [modalData, setModalData] = useState({ show: false, message: '', title: '' });
 
   useEffect(() => {
     const getPosts = async () => {

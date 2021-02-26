@@ -3,10 +3,9 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import FormPost from '../../components/Form-post';
 import Modal from '../../components/Modal';
+import PostNotFound from '../../components/Post-not-found';
 
 import { updatePost, getPostById } from '../../services/post.service';
-
-import PostNotFound from './components/Post-not-found';
 
 export default function UpdatePost() {
   const [formValues, setFormValues] = useState({ title: '', content: '', isSending: false });

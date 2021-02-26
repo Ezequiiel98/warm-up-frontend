@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import {
   Home, CreatePost, UpdatePost, Post,
 } from '../../pages';
@@ -13,7 +13,6 @@ function AppRouting() {
         <Route exact path="/new-post" component={CreatePost} />
         <Route exact path="/edit-post/:id" component={UpdatePost} />
         <Route exact path="/post/:id" component={Post} />
-        <Route path="/" render={() => <Redirect to="/" />} />
       </Layout>
     </Switch>
   );

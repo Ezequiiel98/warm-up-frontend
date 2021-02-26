@@ -1,3 +1,13 @@
+import CardPost from '../../components/CardPost';
+
 export default function Home() {
-  return <h1>home</h1>;
+  const handleDelete = id => {
+    console.log(id);
+  };
+
+  return (
+    <div className="d-flex justify-content-between flex-wrap">
+      <CardPost id="5" title="juanchooote" onDelete={handleDelete} />
+    </div>
+  );
 }

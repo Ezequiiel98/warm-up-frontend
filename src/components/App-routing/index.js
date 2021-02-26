@@ -1,13 +1,12 @@
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Home from '../../pages/Home';
+
 function AppRouting() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-          Learn React
-      </header>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/" render={() => <Redirect to="/" />} />
+    </Switch>
   );
 }
 

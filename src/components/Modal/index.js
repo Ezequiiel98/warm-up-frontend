@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export default function Modal({
   show, onClose, message, title,
 }) {
-  const customStyles = { display: `${show ? 'block' : 'hidden'}`, backgroundColor: 'rgba(0,0,0,.4)' };
+  const customStyles = { display: `${show ? 'block' : 'none'}`, backgroundColor: 'rgba(0,0,0,.4)' };
 
   return (
     <div className={`modal fade ${show ? 'show' : ''}`} style={customStyles}>

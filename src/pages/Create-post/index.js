@@ -6,10 +6,16 @@ import Modal from '../../components/Modal';
 export default function CreatePost() {
   const [formValues, setFormValues] = useState({ title: '', content: '' });
   const [formErrors, setFormErrors] = useState({ title: '', content: '' });
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
     setFormValues((lastValues) => ({ ...lastValues, [name]: value }));
     setFormErrors((lastValues) => ({ ...lastValues, [name]: '' }));
+  };
+
+  const sendPost = (data) => {
+    setShowModal(true);
+    console.log(data);
   };
 
   const onSubmit = (e) => {
@@ -25,9 +31,11 @@ export default function CreatePost() {
     }
 
     if (title && content) {
-      console.log(formValues);
+      sendPost(formValues);
     }
   };
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <>
@@ -38,7 +46,12 @@ export default function CreatePost() {
         onChange={handleChange}
         onSubmit={onSubmit}
       />
-      <Modal show onClose={() => false} title="Post" message="Post created successfully" />
+      <Modal
+        title="Post"
+        message="Post created successfully"
+        show={showModal}
+        onClose={handleCloseModal}
+      />
     </>
   );
 }

@@ -1,3 +1,12 @@
+import FormPost from '../../components/Form-post';
+
 export default function CreatePost() {
-  return <h1>create post form</h1>;
+  return (
+    <FormPost
+      data={{ title: 'pepe', content: 'popo' }}
+      errors={{ title: 'jj', content: '' }}
+      onChange={(e) => console.log(e.target.value)}
+      onSubmit={() => console.log('pepe')}
+    />
+  );
 }

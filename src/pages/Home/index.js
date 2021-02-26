@@ -1,4 +1,4 @@
-import CardPost from '../../components/CardPost';
+import CardPost from '../../components/Card-post';
 
 export default function Home() {
   const handleDelete = id => {

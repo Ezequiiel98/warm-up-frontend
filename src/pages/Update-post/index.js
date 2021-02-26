@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import FormPost from '../../components/Form-post';
 import Modal from '../../components/Modal';
@@ -14,7 +14,6 @@ export default function UpdatePost() {
   const [postNotFound, setPostNotFound] = useState(false);
 
   const { id } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
     const getPost = async () => {
@@ -43,11 +42,9 @@ export default function UpdatePost() {
       await updatePost({ id, data });
 
       setModalData({ show: true, title: 'Post updated', message: 'Post was updated successfully' });
-      setFormValues({ title: '', content: '', isSending: false });
-      setTimeout(() => history.goBack(), 800);
+      setFormValues((last) => ({ ...last, isSending: false }));
     } catch {
       setModalData({ show: true, title: 'Error', message: 'Something is wrong, try later' });
-      setTimeout(() => history.goBack(), 800);
     }
   };
 
